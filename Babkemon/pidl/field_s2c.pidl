@@ -1,0 +1,3 @@
+global field_s2c 200 {
+	Snapshot([in] mgg::babkemon::field::Snapshot snapshot);
+}

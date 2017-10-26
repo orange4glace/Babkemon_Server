@@ -1,0 +1,4 @@
+global common_s2c 100 {
+	EnterBattle([in] int battle_id);
+	EnterField([in] int field_id);
+}
