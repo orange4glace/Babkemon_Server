@@ -3,12 +3,19 @@
 
 #include "logger\logger.h"
 
-#include "..\..\..\pidl\common_s2c_common.cpp"
-#include "..\..\..\pidl\common_s2c_proxy.cpp"
-#include "..\..\..\pidl\field_s2c_common.cpp"
-#include "..\..\..\pidl\field_s2c_proxy.cpp"
+#include "player.h"
+#include "inventory.h"
 
+#include "pidl\common_pidl.h"
+#include "pidl\battle_pidl.h"
+#include "pidl\field_pidl.h"
+
+#include "field\field_manager.h"
 #include "battle\battle_manager.h"
+
+#include "common\item_factory.h"
+#include "common\babkemon\skill_factory.h"
+#include "common\babkemon_factory.h"
 
 #include <cassert>
 #include <iostream>
@@ -41,8 +48,12 @@ void Server::initialize() {
     // server_param.m_localNicAddr = Proud::String("192.168.0.19");
     server_->SetEventSink(this);
 
-    server_->AttachProxy(&common_s2c_proxy_);
-    server_->AttachProxy(&field_s2c_proxy_);
+    pidl::CommonPIDL::instance().AttachProxy(server_);
+    pidl::CommonPIDL::instance().AttachStub(server_);
+    pidl::BattlePIDL::instance().AttachProxy(server_);
+    pidl::BattlePIDL::instance().AttachStub(server_);
+    pidl::FieldPIDL::instance().AttachProxy(server_);
+    pidl::FieldPIDL::instance().AttachStub(server_);
 
     /* Starts the server.
     This function throws an exception on failure.
@@ -65,18 +76,45 @@ bool Server::OnConnectionRequest(Proud::AddrPort client_addr, Proud::ByteArray& 
 }
 
 void Server::OnClientJoin(Proud::CNetClientInfo* client_info) {
-  L_DEBUG << "Client joined.";
+  auto lock = unique_lock();
   Player* player = new Player((PlayerID)client_info->m_HostID, client_info->m_HostID);
   assert(!players_.count((PlayerID)client_info->m_HostID));
   players_[(PlayerID)client_info->m_HostID] = player;
-  auto battle = battle::BattleManager::instance()->CreateBattle();
-  battle::BattleManager::instance()->EnterPlayerBattle(player, battle);
+  L_DEBUG << "Client joined. " << player->id();
+  pidl::CommonPIDL::instance().ProxyWelcome(player);
+  field::FieldManager::instance()->SetPlayerField(player, 0);
+
+  auto booty = ItemFactory::CreateItem(ItemType::SMALL_POSION);
+  player->inventory()->AddItem(booty);
+
+  auto slime = BabkemonFactory::Create(BabkemonType::SLIME);
+  auto skill = babkemon::SkillFactory::Create(slime, babkemon::SkillType::BODY_SLAM);
+  slime->AddSkill(skill);
+  player->AddBabkemon(slime);
 }
 
 void Server::OnClientLeave(Proud::CNetClientInfo* client_info, Proud::ErrorInfo* error_info, const Proud::ByteArray& comment) {
-  L_DEBUG << "Client leaved.";
+  auto lock = unique_lock();
+  // Server locked
+  // No other threads can access players
   assert(players_.count((PlayerID)client_info->m_HostID));
+  auto player = players_[(PlayerID)client_info->m_HostID];
+  // Wait for other thread to finish a player locked job if any
+  player->Lock();
+  player->Unlock();
+  // Player jobs are finished
+  // Since Any thread which wants to access the player should lock Server first,
+  // In this phase, no other threads can access this player.
+  field::FieldManager::instance()->ClearPlayerField(player);
   players_.erase((PlayerID)client_info->m_HostID);
+  delete player;
+
+  // TODO : Much more cleanups
+
+  // Server unlocked
+  // Now other threads can access players
+  // Try to access this player returns nullptr
+  L_DEBUG << "Client leaved. " << client_info->m_HostID;
 }
 
 void Server::OnClientOffline(Proud::CRemoteOfflineEventArgs& args) {
@@ -87,17 +125,10 @@ void Server::OnClientOnline(Proud::CRemoteOnlineEventArgs& args) {
 
 }
 
-Player* const Server::GetPlayer(PlayerID id) {
-  assert(players_.count(id));
-  return players_[id];
-}
-
-void Server::ProxyEnterField(const Player* const player, int field_id) {
-  common_s2c_proxy_.EnterField(player->host_id(), Proud::RmiContext::ReliableSend, field_id);
-}
-
-void Server::ProxyEnterBattle(const Player* const player, int battle_id) {
-  common_s2c_proxy_.EnterBattle(player->host_id(), Proud::RmiContext::ReliableSend, battle_id);
+std::pair<Player* const, std::unique_lock<std::mutex>> Server::GetLockedPlayer(PlayerID id) {
+  auto lock = unique_lock();
+  auto player = players_[id];
+  return{ players_[id], std::move(std::unique_lock<std::mutex>(player->mutex())) };
 }
 
 }

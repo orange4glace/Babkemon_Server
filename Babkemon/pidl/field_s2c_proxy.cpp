@@ -13,7 +13,7 @@ namespace field_s2c {
 
 
         
-	bool Proxy::Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::Snapshot & snapshot)	{
+	bool Proxy::Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::FieldSnapshotPacket & snapshot)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
@@ -27,7 +27,7 @@ __msg << snapshot;
 			RmiName_Snapshot, (::Proud::RmiID)Rmi_Snapshot);
 	}
 
-	bool Proxy::Snapshot ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::field::Snapshot & snapshot)  	{
+	bool Proxy::Snapshot ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::field::FieldSnapshotPacket & snapshot)  	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
 __msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
@@ -40,10 +40,76 @@ __msg << snapshot;
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
 			RmiName_Snapshot, (::Proud::RmiID)Rmi_Snapshot);
 	}
+        
+	bool Proxy::SpawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::EntitySpawnPacket & packet)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_SpawnEntity;
+__msg.Write(__msgid); 
+	
+__msg << packet;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_SpawnEntity, (::Proud::RmiID)Rmi_SpawnEntity);
+	}
+
+	bool Proxy::SpawnEntity ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::field::EntitySpawnPacket & packet)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_SpawnEntity;
+__msg.Write(__msgid); 
+	
+__msg << packet;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_SpawnEntity, (::Proud::RmiID)Rmi_SpawnEntity);
+	}
+        
+	bool Proxy::DespawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & entity_id)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_DespawnEntity;
+__msg.Write(__msgid); 
+	
+__msg << entity_id;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_DespawnEntity, (::Proud::RmiID)Rmi_DespawnEntity);
+	}
+
+	bool Proxy::DespawnEntity ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & entity_id)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_DespawnEntity;
+__msg.Write(__msgid); 
+	
+__msg << entity_id;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_DespawnEntity, (::Proud::RmiID)Rmi_DespawnEntity);
+	}
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_Snapshot =_PNT("Snapshot");
 #else
 const PNTCHAR* Proxy::RmiName_Snapshot =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_SpawnEntity =_PNT("SpawnEntity");
+#else
+const PNTCHAR* Proxy::RmiName_SpawnEntity =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_DespawnEntity =_PNT("DespawnEntity");
+#else
+const PNTCHAR* Proxy::RmiName_DespawnEntity =_PNT("");
 #endif
 const PNTCHAR* Proxy::RmiName_First = RmiName_Snapshot;
 

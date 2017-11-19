@@ -4,6 +4,10 @@
 
 #include "field.h"
 
+#include "..\utility\lockable.h"
+
+#include "logger\logger.h"
+
 #include <map>
 
 namespace mgg {
@@ -12,7 +16,7 @@ namespace babkemon {
 
 namespace field {
 
-class FieldManager {
+class FieldManager : public Lockable {
 
   static FieldManager* instance_;
 
@@ -21,17 +25,18 @@ class FieldManager {
 
 public:
   inline static FieldManager* instance() {
-    if (instance_ == nullptr)
-      instance_ = new FieldManager();
     return instance_;
   }
+
+  static void Init();
 
   FieldManager();
 
   void AddField(Field* const field);
-  Field* const GetField(int id);
-  void SetPlayerField(const Player* const player, Field* const field);
-  Field* const GetPlayerField(const Player* const player);
+  locked(Field) GetLockedField(int id);
+  void SetPlayerField(Player* const player, int field_id);
+  void ClearPlayerField(Player* const player);
+  locked(Field) GetLockedFieldByPlayer(const Player* const player);
 
 };
 

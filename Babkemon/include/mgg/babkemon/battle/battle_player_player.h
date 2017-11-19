@@ -18,6 +18,7 @@ class BattlePlayerPlayer : public BattlePlayer {
 public:
   BattlePlayerPlayer(Battle* const battle, Player* const player);
 
+  Player* const player();
   PlayerID id() const override;
 
 };

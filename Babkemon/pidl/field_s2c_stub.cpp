@@ -53,7 +53,7 @@ namespace field_s2c {
 					ctx.m_compressMode = pa.GetCompressMode();
 					
 					
-					mgg::babkemon::field::Snapshot snapshot; __msg >> snapshot;
+					mgg::babkemon::field::FieldSnapshotPacket snapshot; __msg >> snapshot;
 					m_core->PostCheckReadMessage(__msg,RmiName_Snapshot);
 					
 			
@@ -117,6 +117,154 @@ namespace field_s2c {
 					}
 				}
 				break;
+			case Rmi_SpawnEntity:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					mgg::babkemon::field::EntitySpawnPacket packet; __msg >> packet;
+					m_core->PostCheckReadMessage(__msg,RmiName_SpawnEntity);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,packet);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_SpawnEntity, 
+							RmiName_SpawnEntity,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_SpawnEntity, 
+							RmiName_SpawnEntity, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_SpawnEntity, 
+							RmiName_SpawnEntity, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_SpawnEntity;
+						summary.m_rmiName = RmiName_SpawnEntity;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = SpawnEntity (remote,ctx , packet );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_SpawnEntity);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_SpawnEntity;
+						summary.m_rmiName = RmiName_SpawnEntity;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_DespawnEntity:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					int entity_id; __msg >> entity_id;
+					m_core->PostCheckReadMessage(__msg,RmiName_DespawnEntity);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,entity_id);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_DespawnEntity, 
+							RmiName_DespawnEntity,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_DespawnEntity, 
+							RmiName_DespawnEntity, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_DespawnEntity, 
+							RmiName_DespawnEntity, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_DespawnEntity;
+						summary.m_rmiName = RmiName_DespawnEntity;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = DespawnEntity (remote,ctx , entity_id );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_DespawnEntity);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_DespawnEntity;
+						summary.m_rmiName = RmiName_DespawnEntity;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
 		default:
 			goto __fail;
 		}		
@@ -131,6 +279,16 @@ __fail:
 	const PNTCHAR* Stub::RmiName_Snapshot =_PNT("Snapshot");
 	#else
 	const PNTCHAR* Stub::RmiName_Snapshot =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_SpawnEntity =_PNT("SpawnEntity");
+	#else
+	const PNTCHAR* Stub::RmiName_SpawnEntity =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_DespawnEntity =_PNT("DespawnEntity");
+	#else
+	const PNTCHAR* Stub::RmiName_DespawnEntity =_PNT("");
 	#endif
 	const PNTCHAR* Stub::RmiName_First = RmiName_Snapshot;
 

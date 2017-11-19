@@ -10,9 +10,13 @@ namespace field_s2c {
 	::Proud::RmiID g_RmiIDList[] = {
                
 		Rmi_Snapshot,
+               
+		Rmi_SpawnEntity,
+               
+		Rmi_DespawnEntity,
 	};
 
-	int g_RmiIDListCount = 1;
+	int g_RmiIDListCount = 3;
 
 }
 

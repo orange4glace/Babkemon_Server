@@ -13,6 +13,34 @@ namespace common_s2c {
 
 
         
+	bool Proxy::Welcome ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & player_id)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Welcome;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_Welcome, (::Proud::RmiID)Rmi_Welcome);
+	}
+
+	bool Proxy::Welcome ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & player_id)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_Welcome;
+__msg.Write(__msgid); 
+	
+__msg << player_id;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_Welcome, (::Proud::RmiID)Rmi_Welcome);
+	}
+        
 	bool Proxy::EnterBattle ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & battle_id)	{
 		::Proud::CMessage __msg;
 __msg.UseInternalBuffer();
@@ -68,6 +96,125 @@ __msg << field_id;
 		return RmiSend(remotes,remoteCount,rmiContext,__msg,
 			RmiName_EnterField, (::Proud::RmiID)Rmi_EnterField);
 	}
+        
+	bool Proxy::AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::item::ItemPacket & packet)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_AddItem;
+__msg.Write(__msgid); 
+	
+__msg << packet;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_AddItem, (::Proud::RmiID)Rmi_AddItem);
+	}
+
+	bool Proxy::AddItem ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::item::ItemPacket & packet)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_AddItem;
+__msg.Write(__msgid); 
+	
+__msg << packet;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_AddItem, (::Proud::RmiID)Rmi_AddItem);
+	}
+        
+	bool Proxy::RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & item_id)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_RemoveItem;
+__msg.Write(__msgid); 
+	
+__msg << item_id;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_RemoveItem, (::Proud::RmiID)Rmi_RemoveItem);
+	}
+
+	bool Proxy::RemoveItem ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & item_id)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_RemoveItem;
+__msg.Write(__msgid); 
+	
+__msg << item_id;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_RemoveItem, (::Proud::RmiID)Rmi_RemoveItem);
+	}
+        
+	bool Proxy::SetItemAmount ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & item_id, const int & amount)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_SetItemAmount;
+__msg.Write(__msgid); 
+	
+__msg << item_id;
+__msg << amount;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_SetItemAmount, (::Proud::RmiID)Rmi_SetItemAmount);
+	}
+
+	bool Proxy::SetItemAmount ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & item_id, const int & amount)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_SetItemAmount;
+__msg.Write(__msgid); 
+	
+__msg << item_id;
+__msg << amount;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_SetItemAmount, (::Proud::RmiID)Rmi_SetItemAmount);
+	}
+        
+	bool Proxy::AddBabkemon ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::packet::BabkemonPacket & packet)	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_AddBabkemon;
+__msg.Write(__msgid); 
+	
+__msg << packet;
+		
+		return RmiSend(&remote,1,rmiContext,__msg,
+			RmiName_AddBabkemon, (::Proud::RmiID)Rmi_AddBabkemon);
+	}
+
+	bool Proxy::AddBabkemon ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::packet::BabkemonPacket & packet)  	{
+		::Proud::CMessage __msg;
+__msg.UseInternalBuffer();
+__msg.SetSimplePacketMode(m_core->IsSimplePacketMode());
+
+::Proud::RmiID __msgid=(::Proud::RmiID)Rmi_AddBabkemon;
+__msg.Write(__msgid); 
+	
+__msg << packet;
+		
+		return RmiSend(remotes,remoteCount,rmiContext,__msg,
+			RmiName_AddBabkemon, (::Proud::RmiID)Rmi_AddBabkemon);
+	}
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_Welcome =_PNT("Welcome");
+#else
+const PNTCHAR* Proxy::RmiName_Welcome =_PNT("");
+#endif
 #ifdef USE_RMI_NAME_STRING
 const PNTCHAR* Proxy::RmiName_EnterBattle =_PNT("EnterBattle");
 #else
@@ -78,7 +225,27 @@ const PNTCHAR* Proxy::RmiName_EnterField =_PNT("EnterField");
 #else
 const PNTCHAR* Proxy::RmiName_EnterField =_PNT("");
 #endif
-const PNTCHAR* Proxy::RmiName_First = RmiName_EnterBattle;
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_AddItem =_PNT("AddItem");
+#else
+const PNTCHAR* Proxy::RmiName_AddItem =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_RemoveItem =_PNT("RemoveItem");
+#else
+const PNTCHAR* Proxy::RmiName_RemoveItem =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_SetItemAmount =_PNT("SetItemAmount");
+#else
+const PNTCHAR* Proxy::RmiName_SetItemAmount =_PNT("");
+#endif
+#ifdef USE_RMI_NAME_STRING
+const PNTCHAR* Proxy::RmiName_AddBabkemon =_PNT("AddBabkemon");
+#else
+const PNTCHAR* Proxy::RmiName_AddBabkemon =_PNT("");
+#endif
+const PNTCHAR* Proxy::RmiName_First = RmiName_Welcome;
 
 }
 

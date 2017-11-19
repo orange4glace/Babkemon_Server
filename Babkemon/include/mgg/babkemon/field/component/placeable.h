@@ -21,6 +21,11 @@ public:
     return 1;
   }
 
+  Placeable(Entity* const entity);
+
+  const IVector2& position() const;
+  void set_position(const IVector2& val);
+
 };
 
 }

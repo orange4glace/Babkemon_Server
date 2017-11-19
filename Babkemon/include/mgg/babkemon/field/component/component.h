@@ -8,10 +8,18 @@ namespace babkemon {
 
 namespace field {
 
+class Entity;
+
 class Component {
+
+protected:
+  Entity* entity_;
+
+  Component(Entity* const entity);
 
 public:
   virtual inline int get_type() const = 0;
+  virtual void Initialize() {}
 
 };
 

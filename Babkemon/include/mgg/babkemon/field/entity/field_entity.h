@@ -3,6 +3,10 @@
 #define MGG_BABKEMON_FIELD_ENTITY_H_
 
 #include "../component/component.h"
+#include "..\component\placeable.h"
+
+#include "field_entity_type.h"
+#include "player.h"
 
 #include <map>
 #include <iostream>
@@ -18,14 +22,23 @@ class Field;
 
 class Entity {
 
+  friend class Field;
+
   static int next_entity_id_;
 
   std::map<int, Component*> components_;
 
+protected:
   int id_;
+  EntityType type_;
+
+  Field* field_;
+  Placeable placeable_;
+
+  Player* player_;
 
 public:
-  Entity();
+  Entity(EntityType type, Player* const player);
 
   template<class ComponentType>
   ComponentType* AddComponent(ComponentType* component) {
@@ -40,7 +53,14 @@ public:
     return static_cast<ComponentType*>(components_.at(ComponentType::type()));
   }
 
+  void Init();
+
+  const IVector2& position() const;
+
+  Field* const field();
+  EntityType type() const;
   int id() const;
+  Player* const player();
 
 };
 

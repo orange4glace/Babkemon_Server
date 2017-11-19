@@ -17,12 +17,27 @@ namespace common_s2c {
 	class Proxy : public ::Proud::IRmiProxy
 	{
 	public:
+	virtual bool Welcome ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & player_id) PN_SEALED; 
+	virtual bool Welcome ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & player_id)   PN_SEALED;  
 	virtual bool EnterBattle ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & battle_id) PN_SEALED; 
 	virtual bool EnterBattle ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & battle_id)   PN_SEALED;  
 	virtual bool EnterField ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & field_id) PN_SEALED; 
 	virtual bool EnterField ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & field_id)   PN_SEALED;  
+	virtual bool AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::item::ItemPacket & packet) PN_SEALED; 
+	virtual bool AddItem ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::item::ItemPacket & packet)   PN_SEALED;  
+	virtual bool RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & item_id) PN_SEALED; 
+	virtual bool RemoveItem ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & item_id)   PN_SEALED;  
+	virtual bool SetItemAmount ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & item_id, const int & amount) PN_SEALED; 
+	virtual bool SetItemAmount ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & item_id, const int & amount)   PN_SEALED;  
+	virtual bool AddBabkemon ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::packet::BabkemonPacket & packet) PN_SEALED; 
+	virtual bool AddBabkemon ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::packet::BabkemonPacket & packet)   PN_SEALED;  
+static const PNTCHAR* RmiName_Welcome;
 static const PNTCHAR* RmiName_EnterBattle;
 static const PNTCHAR* RmiName_EnterField;
+static const PNTCHAR* RmiName_AddItem;
+static const PNTCHAR* RmiName_RemoveItem;
+static const PNTCHAR* RmiName_SetItemAmount;
+static const PNTCHAR* RmiName_AddBabkemon;
 static const PNTCHAR* RmiName_First;
 		Proxy()
 		{

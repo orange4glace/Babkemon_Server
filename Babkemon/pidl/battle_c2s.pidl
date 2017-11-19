@@ -1,0 +1,7 @@
+rename cs(mgg::babkemon::battle::EntityID, int);
+
+[marshaler(cs)=mgg.babkemon.network.Marshaler] global battle_c2s 2100 {
+	SpawnEntity([in] int entity_id);
+	SkillCommand([in] int entity_id, [in] mgg::babkemon::battle::SkillCommandPacket packet);
+	ItemCommand([in] int entity_id, [in] mgg::babkemon::battle::ItemCommandPacket packet);
+}

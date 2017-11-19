@@ -1,4 +1,11 @@
-global common_s2c 100 {
+[marshaler(cs)=mgg.babkemon.network.Marshaler] global common_s2c 2400 {
+	Welcome([in] int player_id);
 	EnterBattle([in] int battle_id);
 	EnterField([in] int field_id);
+
+	AddItem([in] mgg::babkemon::item::ItemPacket packet);
+	RemoveItem([in] int item_id);
+	SetItemAmount([in] int item_id, [in] int amount);
+
+	AddBabkemon([in] mgg::babkemon::packet::BabkemonPacket packet);
 }

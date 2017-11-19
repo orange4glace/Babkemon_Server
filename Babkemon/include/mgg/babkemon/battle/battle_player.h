@@ -4,7 +4,7 @@
 
 #include "../player.h"
 
-#include "entity\battle_entity.h"
+#include "battle_entity.h"
 
 #include <vector>
 
@@ -16,16 +16,29 @@ namespace battle {
 
 class Battle;
 
-class BattlePlayer {
+#define AI_PLAYER_ID (PlayerID)2147483647
 
+enum class BattlePlayerType {
+  PLAYER, AI
+};
+
+class BattlePlayer {
+   
+protected:
   Battle* battle_;
+  BattlePlayerType type_;
+
+  std::vector<Entity*> entities_;
 
 public:
-  BattlePlayer(Battle* const battle);
+  BattlePlayer(Battle* const battle, BattlePlayerType type);
+
+  void SpawnBabkemon(Babkemon* const babkemon);
+
+  Entity* const entity(int id);
 
   virtual PlayerID id() const = 0;
-
-  void SpawnBabkemon(Entity* const entity);
+  BattlePlayerType type() const;
 
 };
 

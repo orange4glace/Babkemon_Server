@@ -1,0 +1,12 @@
+rename cs(mgg::babkemon::battle::EntityID, int);
+
+[marshaler(cs)=mgg.babkemon.network.Marshaler] global battle_s2c 2000 {
+	SetCooldown([in] mgg::babkemon::battle::EntityID id, [in] int cooldown);
+	BattleInfo([in] mgg::babkemon::battle::BattleInfoPacket battle_info);
+	SpawnEntity([in] int battle_player_id, [in] mgg::babkemon::battle::EntitySpawnPacket packet);
+	CastSkill([in] mgg::babkemon::battle::EntityID entity_id, [in] mgg::babkemon::packet::SkillBattleCastPacket packet);
+	BattleEnd();
+	BattleWin();
+	BattleLose();
+	Turn();
+}

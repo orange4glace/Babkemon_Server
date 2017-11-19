@@ -8,9 +8,13 @@ namespace babkemon {
 namespace battle {
 
 BattlePlayerPlayer::BattlePlayerPlayer(Battle* const battle, Player* const player) :
-  BattlePlayer(battle),
+  BattlePlayer(battle, BattlePlayerType::PLAYER),
   player_(player) {
 
+}
+
+Player* const BattlePlayerPlayer::player() {
+  return player_;
 }
 
 PlayerID BattlePlayerPlayer::id() const {

@@ -21,6 +21,16 @@ namespace common_s2c {
 	{
 	public:
                
+		virtual bool Welcome ( ::Proud::HostID, ::Proud::RmiContext& , const int  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_common_s2c_Welcome bool Welcome ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & player_id) PN_OVERRIDE
+
+#define DEFRMI_common_s2c_Welcome(DerivedClass) bool DerivedClass::Welcome ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & player_id)
+#define CALL_common_s2c_Welcome Welcome ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & player_id)
+#define PARAM_common_s2c_Welcome ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & player_id)
+               
 		virtual bool EnterBattle ( ::Proud::HostID, ::Proud::RmiContext& , const int  & )		{ 
 			return false;
 		} 
@@ -40,10 +50,55 @@ namespace common_s2c {
 #define DEFRMI_common_s2c_EnterField(DerivedClass) bool DerivedClass::EnterField ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & field_id)
 #define CALL_common_s2c_EnterField EnterField ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & field_id)
 #define PARAM_common_s2c_EnterField ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & field_id)
+               
+		virtual bool AddItem ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::item::ItemPacket  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_common_s2c_AddItem bool AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::item::ItemPacket  & packet) PN_OVERRIDE
+
+#define DEFRMI_common_s2c_AddItem(DerivedClass) bool DerivedClass::AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::item::ItemPacket  & packet)
+#define CALL_common_s2c_AddItem AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::item::ItemPacket  & packet)
+#define PARAM_common_s2c_AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::item::ItemPacket  & packet)
+               
+		virtual bool RemoveItem ( ::Proud::HostID, ::Proud::RmiContext& , const int  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_common_s2c_RemoveItem bool RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id) PN_OVERRIDE
+
+#define DEFRMI_common_s2c_RemoveItem(DerivedClass) bool DerivedClass::RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id)
+#define CALL_common_s2c_RemoveItem RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id)
+#define PARAM_common_s2c_RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id)
+               
+		virtual bool SetItemAmount ( ::Proud::HostID, ::Proud::RmiContext& , const int  & , const int  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_common_s2c_SetItemAmount bool SetItemAmount ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id, const int  & amount) PN_OVERRIDE
+
+#define DEFRMI_common_s2c_SetItemAmount(DerivedClass) bool DerivedClass::SetItemAmount ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id, const int  & amount)
+#define CALL_common_s2c_SetItemAmount SetItemAmount ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id, const int  & amount)
+#define PARAM_common_s2c_SetItemAmount ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id, const int  & amount)
+               
+		virtual bool AddBabkemon ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::packet::BabkemonPacket  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_common_s2c_AddBabkemon bool AddBabkemon ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::packet::BabkemonPacket  & packet) PN_OVERRIDE
+
+#define DEFRMI_common_s2c_AddBabkemon(DerivedClass) bool DerivedClass::AddBabkemon ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::packet::BabkemonPacket  & packet)
+#define CALL_common_s2c_AddBabkemon AddBabkemon ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::packet::BabkemonPacket  & packet)
+#define PARAM_common_s2c_AddBabkemon ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::packet::BabkemonPacket  & packet)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
+		static const PNTCHAR* RmiName_Welcome;
 		static const PNTCHAR* RmiName_EnterBattle;
 		static const PNTCHAR* RmiName_EnterField;
+		static const PNTCHAR* RmiName_AddItem;
+		static const PNTCHAR* RmiName_RemoveItem;
+		static const PNTCHAR* RmiName_SetItemAmount;
+		static const PNTCHAR* RmiName_AddBabkemon;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
 		virtual int GetRmiIDListCount() PN_OVERRIDE { return g_RmiIDListCount; }
@@ -54,6 +109,15 @@ namespace common_s2c {
 	class StubFunctional : public Stub 
 	{
 	public:
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int  & ) > Welcome_Function;
+		virtual bool Welcome ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & player_id) 
+		{ 
+			if (Welcome_Function==nullptr) 
+				return true; 
+			return Welcome_Function(remote,rmiContext, player_id); 
+		}
+
                
 		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int  & ) > EnterBattle_Function;
 		virtual bool EnterBattle ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & battle_id) 
@@ -70,6 +134,42 @@ namespace common_s2c {
 			if (EnterField_Function==nullptr) 
 				return true; 
 			return EnterField_Function(remote,rmiContext, field_id); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::item::ItemPacket  & ) > AddItem_Function;
+		virtual bool AddItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::item::ItemPacket  & packet) 
+		{ 
+			if (AddItem_Function==nullptr) 
+				return true; 
+			return AddItem_Function(remote,rmiContext, packet); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int  & ) > RemoveItem_Function;
+		virtual bool RemoveItem ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id) 
+		{ 
+			if (RemoveItem_Function==nullptr) 
+				return true; 
+			return RemoveItem_Function(remote,rmiContext, item_id); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int  & , const int  & ) > SetItemAmount_Function;
+		virtual bool SetItemAmount ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & item_id, const int  & amount) 
+		{ 
+			if (SetItemAmount_Function==nullptr) 
+				return true; 
+			return SetItemAmount_Function(remote,rmiContext, item_id, amount); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::packet::BabkemonPacket  & ) > AddBabkemon_Function;
+		virtual bool AddBabkemon ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::packet::BabkemonPacket  & packet) 
+		{ 
+			if (AddBabkemon_Function==nullptr) 
+				return true; 
+			return AddBabkemon_Function(remote,rmiContext, packet); 
 		}
 
 	};

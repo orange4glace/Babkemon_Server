@@ -17,9 +17,15 @@ namespace field_s2c {
 	class Proxy : public ::Proud::IRmiProxy
 	{
 	public:
-	virtual bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::Snapshot & snapshot) PN_SEALED; 
-	virtual bool Snapshot ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::field::Snapshot & snapshot)   PN_SEALED;  
+	virtual bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::FieldSnapshotPacket & snapshot) PN_SEALED; 
+	virtual bool Snapshot ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::field::FieldSnapshotPacket & snapshot)   PN_SEALED;  
+	virtual bool SpawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::EntitySpawnPacket & packet) PN_SEALED; 
+	virtual bool SpawnEntity ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const mgg::babkemon::field::EntitySpawnPacket & packet)   PN_SEALED;  
+	virtual bool DespawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int & entity_id) PN_SEALED; 
+	virtual bool DespawnEntity ( ::Proud::HostID *remotes, int remoteCount, ::Proud::RmiContext &rmiContext, const int & entity_id)   PN_SEALED;  
 static const PNTCHAR* RmiName_Snapshot;
+static const PNTCHAR* RmiName_SpawnEntity;
+static const PNTCHAR* RmiName_DespawnEntity;
 static const PNTCHAR* RmiName_First;
 		Proxy()
 		{

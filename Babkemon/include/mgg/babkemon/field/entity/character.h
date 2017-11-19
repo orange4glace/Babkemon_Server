@@ -4,7 +4,9 @@
 
 #include "field_entity.h"
 
-#include "../component/placeable.h"
+#include "..\component\movable.h"
+
+#include "..\..\utility\time.h"
 
 namespace mgg {
 
@@ -12,18 +14,22 @@ namespace babkemon {
 
 namespace field {
 
-class Field;
+namespace entity {
 
 class Character : public Entity {
 
-  Placeable* placeable_;
+  game_time last_moved_time_;
+
+  Movable movable_;
 
 public:
-  Character();
+  Character(Player* const player);
 
   void Move(int dir);
 
 };
+
+}
 
 }
 

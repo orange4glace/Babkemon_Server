@@ -12,12 +12,11 @@ namespace battle {
 
 class BattlePlayerAI : public BattlePlayer {
 
-  std::vector<Entity*> entities_;
-
 public:
   BattlePlayerAI(Battle* const battle);
 
   PlayerID id() const override;
+  void Act();
 
 };
 

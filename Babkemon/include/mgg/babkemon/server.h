@@ -6,28 +6,23 @@
 
 #include "logger\logger.h"
 
+#include "utility\lockable.h"
 #include "player.h"
 
 #include "field\snapshot.h"
-#include "..\..\..\pidl\common_s2c_common.h"
-#include "..\..\..\pidl\common_s2c_proxy.h"
-#include "..\..\..\pidl\field_s2c_common.h"
-#include "..\..\..\pidl\field_s2c_proxy.h"
 
 #include <map>
+#include <mutex>
 
 namespace mgg {
 
 namespace babkemon {
 
-class Server : public Proud::INetServerEvent {
+class Server : public Proud::INetServerEvent, public Lockable {
 
   static Server* instance_;
 
   Proud::CNetServer* server_;
-
-  common_s2c::Proxy common_s2c_proxy_;
-  field_s2c::Proxy field_s2c_proxy_;
 
   std::map<PlayerID, Player*> players_;
 
@@ -66,14 +61,12 @@ public:
     L_DEBUG << e.what() << endl;
   }
   void OnNoRmiProcessed(Proud::RmiID rmiID) override {
-
+    L_DEBUG << "No RMI";
   }
 
-  Player* const GetPlayer(PlayerID id);
+  std::pair<Player* const, std::unique_lock<std::mutex>> GetLockedPlayer(PlayerID id);
 
-  void ProxyEnterField(const Player* const player, int field_id);
-  void ProxyEnterBattle(const Player* const player, int battle_id);
-
+  
 };
 
 }

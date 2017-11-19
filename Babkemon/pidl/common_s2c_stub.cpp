@@ -43,6 +43,80 @@ namespace common_s2c {
 					
 		switch((int)__rmiID) // case is to prevent from clang compile error
 		{
+			case Rmi_Welcome:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					int player_id; __msg >> player_id;
+					m_core->PostCheckReadMessage(__msg,RmiName_Welcome);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,player_id);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_Welcome, 
+							RmiName_Welcome,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Welcome, 
+							RmiName_Welcome, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_Welcome, 
+							RmiName_Welcome, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Welcome;
+						summary.m_rmiName = RmiName_Welcome;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = Welcome (remote,ctx , player_id );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_Welcome);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_Welcome;
+						summary.m_rmiName = RmiName_Welcome;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
 			case Rmi_EnterBattle:
 				{
 					::Proud::RmiContext ctx;
@@ -191,6 +265,306 @@ namespace common_s2c {
 					}
 				}
 				break;
+			case Rmi_AddItem:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					mgg::babkemon::item::ItemPacket packet; __msg >> packet;
+					m_core->PostCheckReadMessage(__msg,RmiName_AddItem);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,packet);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_AddItem, 
+							RmiName_AddItem,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_AddItem, 
+							RmiName_AddItem, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_AddItem, 
+							RmiName_AddItem, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_AddItem;
+						summary.m_rmiName = RmiName_AddItem;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = AddItem (remote,ctx , packet );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_AddItem);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_AddItem;
+						summary.m_rmiName = RmiName_AddItem;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_RemoveItem:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					int item_id; __msg >> item_id;
+					m_core->PostCheckReadMessage(__msg,RmiName_RemoveItem);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,item_id);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_RemoveItem, 
+							RmiName_RemoveItem,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_RemoveItem, 
+							RmiName_RemoveItem, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_RemoveItem, 
+							RmiName_RemoveItem, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_RemoveItem;
+						summary.m_rmiName = RmiName_RemoveItem;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = RemoveItem (remote,ctx , item_id );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_RemoveItem);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_RemoveItem;
+						summary.m_rmiName = RmiName_RemoveItem;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_SetItemAmount:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					int item_id; __msg >> item_id;
+					int amount; __msg >> amount;
+					m_core->PostCheckReadMessage(__msg,RmiName_SetItemAmount);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,item_id);	
+										
+						parameterString += _PNT(", ");
+						::Proud::AppendTextOut(parameterString,amount);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_SetItemAmount, 
+							RmiName_SetItemAmount,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_SetItemAmount, 
+							RmiName_SetItemAmount, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_SetItemAmount, 
+							RmiName_SetItemAmount, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_SetItemAmount;
+						summary.m_rmiName = RmiName_SetItemAmount;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = SetItemAmount (remote,ctx , item_id, amount );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_SetItemAmount);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_SetItemAmount;
+						summary.m_rmiName = RmiName_SetItemAmount;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
+			case Rmi_AddBabkemon:
+				{
+					::Proud::RmiContext ctx;
+					ctx.m_sentFrom=pa.GetRemoteHostID();
+					ctx.m_relayed=pa.IsRelayed();
+					ctx.m_hostTag = hostTag;
+					ctx.m_encryptMode = pa.GetEncryptMode();
+					ctx.m_compressMode = pa.GetCompressMode();
+					
+					
+					mgg::babkemon::packet::BabkemonPacket packet; __msg >> packet;
+					m_core->PostCheckReadMessage(__msg,RmiName_AddBabkemon);
+					
+			
+					if(m_enableNotifyCallFromStub && !m_internalUse)
+					{
+						::Proud::String parameterString;
+						
+						::Proud::AppendTextOut(parameterString,packet);	
+						
+						NotifyCallFromStub(remote, (::Proud::RmiID)Rmi_AddBabkemon, 
+							RmiName_AddBabkemon,parameterString);
+			
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_AddBabkemon, 
+							RmiName_AddBabkemon, parameterString);
+			#endif
+					}
+					else if(!m_internalUse)
+					{
+			#ifdef VIZAGENT
+						m_core->Viz_NotifyRecvToStub(remote, (::Proud::RmiID)Rmi_AddBabkemon, 
+							RmiName_AddBabkemon, _PNT(""));
+			#endif
+					}
+						
+					int64_t __t0 = 0;
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::BeforeRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_AddBabkemon;
+						summary.m_rmiName = RmiName_AddBabkemon;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						BeforeRmiInvocation(summary);
+			
+						__t0 = ::Proud::GetPreciseCurrentTimeMs();
+					}
+						
+					// Call this method.
+					bool __ret = AddBabkemon (remote,ctx , packet );
+						
+					if(__ret==false)
+					{
+						// Error: RMI function that a user did not create has been called. 
+						m_core->ShowNotImplementedRmiWarning(RmiName_AddBabkemon);
+					}
+						
+					if(!m_internalUse && m_enableStubProfiling)
+					{
+						::Proud::AfterRmiSummary summary;
+						summary.m_rmiID = (::Proud::RmiID)Rmi_AddBabkemon;
+						summary.m_rmiName = RmiName_AddBabkemon;
+						summary.m_hostID = remote;
+						summary.m_hostTag = hostTag;
+						int64_t __t1;
+			
+						__t1 = ::Proud::GetPreciseCurrentTimeMs();
+			
+						summary.m_elapsedTime = (uint32_t)(__t1 - __t0);
+						AfterRmiInvocation(summary);
+					}
+				}
+				break;
 		default:
 			goto __fail;
 		}		
@@ -202,6 +576,11 @@ __fail:
 		}
 	}
 	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_Welcome =_PNT("Welcome");
+	#else
+	const PNTCHAR* Stub::RmiName_Welcome =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
 	const PNTCHAR* Stub::RmiName_EnterBattle =_PNT("EnterBattle");
 	#else
 	const PNTCHAR* Stub::RmiName_EnterBattle =_PNT("");
@@ -211,7 +590,27 @@ __fail:
 	#else
 	const PNTCHAR* Stub::RmiName_EnterField =_PNT("");
 	#endif
-	const PNTCHAR* Stub::RmiName_First = RmiName_EnterBattle;
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_AddItem =_PNT("AddItem");
+	#else
+	const PNTCHAR* Stub::RmiName_AddItem =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_RemoveItem =_PNT("RemoveItem");
+	#else
+	const PNTCHAR* Stub::RmiName_RemoveItem =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_SetItemAmount =_PNT("SetItemAmount");
+	#else
+	const PNTCHAR* Stub::RmiName_SetItemAmount =_PNT("");
+	#endif
+	#ifdef USE_RMI_NAME_STRING
+	const PNTCHAR* Stub::RmiName_AddBabkemon =_PNT("AddBabkemon");
+	#else
+	const PNTCHAR* Stub::RmiName_AddBabkemon =_PNT("");
+	#endif
+	const PNTCHAR* Stub::RmiName_First = RmiName_Welcome;
 
 }
 

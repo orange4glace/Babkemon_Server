@@ -1,3 +1,5 @@
-global field_s2c 200 {
-	Snapshot([in] mgg::babkemon::field::Snapshot snapshot);
+[marshaler(cs)=mgg.babkemon.network.Marshaler] global field_s2c 2200 {
+	Snapshot([in] mgg::babkemon::field::FieldSnapshotPacket snapshot);
+	SpawnEntity([in] mgg::babkemon::field::EntitySpawnPacket packet);
+	DespawnEntity([in] int entity_id);
 }

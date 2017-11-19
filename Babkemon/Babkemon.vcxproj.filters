@@ -18,72 +18,37 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\mgg\babkemon\battle\battle_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\field\field.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\field\entity\character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\server.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\logger\logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\field\field_manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\battle\entity\battle_entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\field\entity\field_entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\battle\battle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\battle\battle_player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\battle\battle_player_player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\battle\battle_player_ai.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mgg\babkemon\battle\entity\battle_slime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\mgg\babkemon\world.h">
+    <ClInclude Include="include\mgg\babkemon\battle\packet\battle_info_packet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\field\field.h">
+    <ClInclude Include="include\mgg\babkemon\battle\packet\battle_skill_cast_packet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\player.h">
+    <ClInclude Include="include\mgg\babkemon\battle\packet\command_packet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\field\component\placeable.h">
+    <ClInclude Include="include\mgg\babkemon\battle\packet\entity_spawn_packet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\field\component\component.h">
+    <ClInclude Include="include\mgg\babkemon\battle\packet\execution_packet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\field\component\component_base.h">
+    <ClInclude Include="include\mgg\babkemon\battle\packet\item_command_packet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\utility\ivector2.h">
+    <ClInclude Include="include\mgg\babkemon\battle\packet\single_target_skill_command_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\battle\packet\skill_command_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\battle\packet\skill_command_packet_raw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\battle\battle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\battle\battle_entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\mgg\babkemon\battle\battle_manager.h">
@@ -92,50 +57,289 @@
     <ClInclude Include="include\mgg\babkemon\battle\battle_player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\common\babkemon_data.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\battle\entity\entity_factory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\common\babkemon_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\player_state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\field\field_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\field\entity\character.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\server.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\logger\logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\field\snapshot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\battle\entity\battle_entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\field\entity\field_entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\battle\battle.h">
+    <ClInclude Include="include\mgg\babkemon\battle\battle_player_ai.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\mgg\babkemon\battle\battle_player_player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\battle\battle_player_ai.h">
+    <ClInclude Include="include\mgg\babkemon\common\babkemon\skill\body_slam.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mgg\babkemon\battle\entity\battle_slime.h">
+    <ClInclude Include="include\mgg\babkemon\common\babkemon\skill\skill_cast_result.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\babkemon\skill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\babkemon\skill_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\babkemon\skill_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\babkemon\slime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\item\babkemon_edible.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\item\health_posion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\item\item_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\packet\babkemon_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\packet\skill_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\babkemon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\babkemon_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\babkemon_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\item_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\item_group.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\common\item_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\component\component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\component\component_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\component\movable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\component\placeable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\entity\character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\entity\field_entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\entity\field_entity_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\packet\character_move_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\packet\entity_spawn_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\packet\field_snapshot_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\field.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\field_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\field_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\snapshot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\field\tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\logger\logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\pidl\battle_pidl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\pidl\common_pidl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\pidl\field_pidl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\pidl\pidl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\utility\ivector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\utility\lockable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\utility\scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\utility\shareable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\utility\time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\inventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\player_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mgg\babkemon\world.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\external_lib\scheduler\Cron.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\external_lib\scheduler\ctpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\external_lib\scheduler\ctpl_stl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\external_lib\scheduler\InterruptableSleep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\external_lib\scheduler\Scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\mgg\babkemon\battle\packet\item_command_packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\battle\packet\skill_command_packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\battle\battle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\battle\battle_entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\battle\battle_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\battle\battle_player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\battle\battle_player_ai.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\battle\battle_player_player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\babkemon\skill\body_slam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\babkemon\skill\skill_cast_result.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\babkemon\skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\babkemon\slime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\item\babkemon_edible.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\item\health_posion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\item\item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\item\item_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\item\item_packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\common\babkemon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\component\component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\component\movable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\component\placeable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\entity\character.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\entity\field_entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\field.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\field_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\field_map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\field\tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\logger\logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\packet\packet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\pidl\battle_pidl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\pidl\common_pidl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\pidl\field_pidl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\babkemon\server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\utility\scheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgg\utility\time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

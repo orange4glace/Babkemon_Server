@@ -21,18 +21,40 @@ namespace field_s2c {
 	{
 	public:
                
-		virtual bool Snapshot ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::field::Snapshot  & )		{ 
+		virtual bool Snapshot ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::field::FieldSnapshotPacket  & )		{ 
 			return false;
 		} 
 
-#define DECRMI_field_s2c_Snapshot bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::Snapshot  & snapshot) PN_OVERRIDE
+#define DECRMI_field_s2c_Snapshot bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::FieldSnapshotPacket  & snapshot) PN_OVERRIDE
 
-#define DEFRMI_field_s2c_Snapshot(DerivedClass) bool DerivedClass::Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::Snapshot  & snapshot)
-#define CALL_field_s2c_Snapshot Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::Snapshot  & snapshot)
-#define PARAM_field_s2c_Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::Snapshot  & snapshot)
+#define DEFRMI_field_s2c_Snapshot(DerivedClass) bool DerivedClass::Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::FieldSnapshotPacket  & snapshot)
+#define CALL_field_s2c_Snapshot Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::FieldSnapshotPacket  & snapshot)
+#define PARAM_field_s2c_Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::FieldSnapshotPacket  & snapshot)
+               
+		virtual bool SpawnEntity ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::field::EntitySpawnPacket  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_field_s2c_SpawnEntity bool SpawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::EntitySpawnPacket  & packet) PN_OVERRIDE
+
+#define DEFRMI_field_s2c_SpawnEntity(DerivedClass) bool DerivedClass::SpawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::EntitySpawnPacket  & packet)
+#define CALL_field_s2c_SpawnEntity SpawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::EntitySpawnPacket  & packet)
+#define PARAM_field_s2c_SpawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::EntitySpawnPacket  & packet)
+               
+		virtual bool DespawnEntity ( ::Proud::HostID, ::Proud::RmiContext& , const int  & )		{ 
+			return false;
+		} 
+
+#define DECRMI_field_s2c_DespawnEntity bool DespawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & entity_id) PN_OVERRIDE
+
+#define DEFRMI_field_s2c_DespawnEntity(DerivedClass) bool DerivedClass::DespawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & entity_id)
+#define CALL_field_s2c_DespawnEntity DespawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & entity_id)
+#define PARAM_field_s2c_DespawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & entity_id)
  
 		virtual bool ProcessReceivedMessage(::Proud::CReceivedMessage &pa, void* hostTag) PN_OVERRIDE;
 		static const PNTCHAR* RmiName_Snapshot;
+		static const PNTCHAR* RmiName_SpawnEntity;
+		static const PNTCHAR* RmiName_DespawnEntity;
 		static const PNTCHAR* RmiName_First;
 		virtual ::Proud::RmiID* GetRmiIDList() PN_OVERRIDE { return g_RmiIDList; }
 		virtual int GetRmiIDListCount() PN_OVERRIDE { return g_RmiIDListCount; }
@@ -44,12 +66,30 @@ namespace field_s2c {
 	{
 	public:
                
-		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::field::Snapshot  & ) > Snapshot_Function;
-		virtual bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::Snapshot  & snapshot) 
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::field::FieldSnapshotPacket  & ) > Snapshot_Function;
+		virtual bool Snapshot ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::FieldSnapshotPacket  & snapshot) 
 		{ 
 			if (Snapshot_Function==nullptr) 
 				return true; 
 			return Snapshot_Function(remote,rmiContext, snapshot); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const mgg::babkemon::field::EntitySpawnPacket  & ) > SpawnEntity_Function;
+		virtual bool SpawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const mgg::babkemon::field::EntitySpawnPacket  & packet) 
+		{ 
+			if (SpawnEntity_Function==nullptr) 
+				return true; 
+			return SpawnEntity_Function(remote,rmiContext, packet); 
+		}
+
+               
+		std::function< bool ( ::Proud::HostID, ::Proud::RmiContext& , const int  & ) > DespawnEntity_Function;
+		virtual bool DespawnEntity ( ::Proud::HostID remote, ::Proud::RmiContext& rmiContext , const int  & entity_id) 
+		{ 
+			if (DespawnEntity_Function==nullptr) 
+				return true; 
+			return DespawnEntity_Function(remote,rmiContext, entity_id); 
 		}
 
 	};

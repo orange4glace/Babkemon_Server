@@ -9,12 +9,22 @@ namespace common_s2c {
 
 	::Proud::RmiID g_RmiIDList[] = {
                
+		Rmi_Welcome,
+               
 		Rmi_EnterBattle,
                
 		Rmi_EnterField,
+               
+		Rmi_AddItem,
+               
+		Rmi_RemoveItem,
+               
+		Rmi_SetItemAmount,
+               
+		Rmi_AddBabkemon,
 	};
 
-	int g_RmiIDListCount = 2;
+	int g_RmiIDListCount = 7;
 
 }
 
